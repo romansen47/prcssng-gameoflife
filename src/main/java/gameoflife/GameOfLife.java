@@ -40,7 +40,7 @@ public class GameOfLife extends processing.template.Gui{
 			 for (int i=0;i<Config.SIZE;i++) {
 				 for (int j=0;j<Config.SIZE;j++) {
 					 Gen[i][j]=new Cell();
-					 Gen[i][j].alive=r.nextBoolean();
+					 Gen[i][j].setAlive(r.nextBoolean());
 				 }
 			 }
 		 }
@@ -54,7 +54,7 @@ public class GameOfLife extends processing.template.Gui{
 		 	background(0);
 
 			present(civ);
-			civ.gen=civ.nextGen();
+			civ.setGen(civ.nextGen());
 			
 
 		 	textSize(30);
@@ -75,13 +75,13 @@ public class GameOfLife extends processing.template.Gui{
                 Config.colors = !Config.colors;
 			}
 			if (keyPressed && key=='r') {
-				civ.gen=gen();
+				civ.setGen(gen());
 			}
 			if (keyPressed && key=='s') {
 				for (int i =0; i<Config.SIZE;i++) {
 					for (int j=0;j<Config.SIZE;j++) {
 						tmpGen[i][j]=new Cell();
-						tmpGen[i][j].alive=civ.gen[i][j].alive;
+						tmpGen[i][j].setAlive(civ.getGen()[i][j].isAlive());
 					}
 				}
 				tmpCount=count;
@@ -89,7 +89,7 @@ public class GameOfLife extends processing.template.Gui{
 			if (keyPressed && key=='l') {
 				for (int i =0; i<Config.SIZE;i++) {
 					for (int j=0;j<Config.SIZE;j++) {
-						civ.gen[i][j].alive=tmpGen[i][j].alive;
+						civ.getGen()[i][j].setAlive(tmpGen[i][j].isAlive());
 					}
 				}
 				count=tmpCount;
@@ -111,9 +111,9 @@ public class GameOfLife extends processing.template.Gui{
 		 Cell[][] tmpCiv=civ.nextGen();
 		 for (int i=0;i<Config.SIZE;i++) {
 			 for (int j=0;j<Config.SIZE;j++) {
-				 if (civ.gen[i][j].alive) {
+				 if (civ.getGen()[i][j].isAlive()) {
 					 if (Config.colors) {
-						 if (tmpCiv[i][j].alive) {
+						 if (tmpCiv[i][j].isAlive()) {
 							 fill(255,255,255);
 						 }
 						 else {
@@ -124,7 +124,7 @@ public class GameOfLife extends processing.template.Gui{
 				 }
 				 else {
 					 if (Config.colors) {
-						 if (tmpCiv[i][j].alive) {
+						 if (tmpCiv[i][j].isAlive()) {
 							 fill(0,255,0);
 						 }
 						 else {
