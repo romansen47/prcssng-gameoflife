@@ -8,8 +8,12 @@ public class Civilization {
 		this.setGen(generation);
 	}
 
+	public Cell[][] getGen() {
+		return this.gen;
+	}
+
 	public Cell[][] nextGen() {
-		Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
+		final Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
 		int count;
 		for (int i = 0; i < Config.SIZE; i++) {
 			for (int j = 0; j < Config.SIZE; j++) {
@@ -47,10 +51,6 @@ public class Civilization {
 			}
 		}
 		return (tmpGen);
-	}
-
-	public Cell[][] getGen() {
-		return gen;
 	}
 
 	public void setGen(Cell[][] gen) {

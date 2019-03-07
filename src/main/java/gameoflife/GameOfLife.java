@@ -2,11 +2,11 @@ package gameoflife;
 
 import java.util.Random;
 
-public class GameOfLife extends processing.template.Gui {
-	public GameOfLife() {
-	};
+import processing.core.PApplet;
 
+public class GameOfLife extends processing.template.Gui {
 	public static int count = 0;
+
 	public static int speed;
 	public static int tmpCount;
 	public static Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
@@ -14,140 +14,142 @@ public class GameOfLife extends processing.template.Gui {
 	 * public static void main(String[] args) { PApplet.main(new String[] {
 	 * "--present","gameoflife.GameOfLife"}); }
 	 */
-
-	public static void main(String[] args) {
-		GameOfLife gol = new GameOfLife();
-		gol.run("gameoflife.GameOfLife");
-	}
-
-	@Override
-	public void settings() {
-		fullScreen();
-		// size(1200,1200);
-	}
-
-	@Override
-	public void setup() {
-		frameRate(Config.framerate);
-	}
-
 	static Random r = new Random();
 
 	public static Cell[][] gen() {
-		Cell[][] Gen = new Cell[Config.SIZE][Config.SIZE];
+		final Cell[][] Gen = new Cell[Config.SIZE][Config.SIZE];
 		{
 			for (int i = 0; i < Config.SIZE; i++) {
 				for (int j = 0; j < Config.SIZE; j++) {
 					Gen[i][j] = new Cell();
-					Gen[i][j].setAlive(r.nextBoolean());
+					Gen[i][j].setAlive(GameOfLife.r.nextBoolean());
 				}
 			}
 		}
 		return (Gen);
 	}
 
-	Civilization civ = new Civilization(gen());
+	public static void main(String[] args) {
+		final GameOfLife gol = new GameOfLife();
+		gol.run("gameoflife.GameOfLife");
+	}
+
+	Civilization civ = new Civilization(GameOfLife.gen());
+
+	public GameOfLife() {
+	}
 
 	@Override
 	public void draw() {
 
-		background(0);
+		this.background(0);
 
-		present(civ);
-		civ.setGen(civ.nextGen());
+		this.present(this.civ);
+		this.civ.setGen(this.civ.nextGen());
 
-		textSize(30);
-		fill(255, 255, 255, 255);
-		text("Options:", 2200, 100);
-		text("r :  	restart (random)", 2200, 150);
-		text("s :   save state", 2200, 180);
-		text("l :   reload state", 2200, 210);
-		text("+ :   speed up", 2200, 240);
-		text("- :   slow down", 2200, 270);
-		text("c :   colors", 2200, 300);
-		text("q :   quit", 2200, 360);
+		this.textSize(30);
+		this.fill(255, 255, 255, 255);
+		this.text("Options:", 2200, 100);
+		this.text("r :  	restart (random)", 2200, 150);
+		this.text("s :   save state", 2200, 180);
+		this.text("l :   reload state", 2200, 210);
+		this.text("+ :   speed up", 2200, 240);
+		this.text("- :   slow down", 2200, 270);
+		this.text("c :   colors", 2200, 300);
+		this.text("q :   quit", 2200, 360);
 
-		count = count + 1;
-		text(str(count) + "th generation", 2200, 540);
+		GameOfLife.count = GameOfLife.count + 1;
+		this.text(PApplet.str(GameOfLife.count) + "th generation", 2200, 540);
 
-		if (keyPressed && key == 'c') {
+		if (this.keyPressed && this.key == 'c') {
 			Config.colors = !Config.colors;
 		}
-		if (keyPressed && key == 'r') {
-			civ.setGen(gen());
+		if (this.keyPressed && this.key == 'r') {
+			this.civ.setGen(GameOfLife.gen());
 		}
-		if (keyPressed && key == 's') {
+		if (this.keyPressed && this.key == 's') {
 			for (int i = 0; i < Config.SIZE; i++) {
 				for (int j = 0; j < Config.SIZE; j++) {
-					tmpGen[i][j] = new Cell();
-					tmpGen[i][j].setAlive(civ.getGen()[i][j].isAlive());
+					GameOfLife.tmpGen[i][j] = new Cell();
+					GameOfLife.tmpGen[i][j].setAlive(this.civ.getGen()[i][j].isAlive());
 				}
 			}
-			tmpCount = count;
+			GameOfLife.tmpCount = GameOfLife.count;
 		}
-		if (keyPressed && key == 'l') {
+		if (this.keyPressed && this.key == 'l') {
 			for (int i = 0; i < Config.SIZE; i++) {
 				for (int j = 0; j < Config.SIZE; j++) {
-					civ.getGen()[i][j].setAlive(tmpGen[i][j].isAlive());
+					this.civ.getGen()[i][j].setAlive(GameOfLife.tmpGen[i][j].isAlive());
 				}
 			}
-			count = tmpCount;
+			GameOfLife.count = GameOfLife.tmpCount;
 		}
-		if (keyPressed && key == '+') {
-			if (speed > 0) {
+		if (this.keyPressed && this.key == '+') {
+			if (GameOfLife.speed > 0) {
 				try {
 					Thread.sleep(200);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					e.printStackTrace();
 				}
-				speed = speed - 50;
+				GameOfLife.speed = GameOfLife.speed - 50;
 			}
 		}
-		if (keyPressed && key == '-') {
+		if (this.keyPressed && this.key == '-') {
 			try {
 				Thread.sleep(200);
-			} catch (InterruptedException e) {
+			} catch (final InterruptedException e) {
 				e.printStackTrace();
 			}
-			speed = speed + 50;
+			GameOfLife.speed = GameOfLife.speed + 50;
 		}
-		if (keyPressed && key == 'q') {
-			exit();
+		if (this.keyPressed && this.key == 'q') {
+			this.exit();
 		}
 		try {
-			Thread.sleep(speed);
-		} catch (InterruptedException e) {
+			Thread.sleep(GameOfLife.speed);
+		} catch (final InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void present(Civilization civ) {
-		Cell[][] tmpCiv = civ.nextGen();
+		final Cell[][] tmpCiv = civ.nextGen();
 		for (int i = 0; i < Config.SIZE; i++) {
 			for (int j = 0; j < Config.SIZE; j++) {
 				if (civ.getGen()[i][j].isAlive()) {
 					if (Config.colors) {
 						if (tmpCiv[i][j].isAlive()) {
-							fill(255, 255, 255);
+							this.fill(255, 255, 255);
 						} else {
-							fill(255, 0, 0);
+							this.fill(255, 0, 0);
 						}
 					} else {
-						fill(255, 255, 255);
+						this.fill(255, 255, 255);
 					}
 				} else {
 					if (Config.colors) {
 						if (tmpCiv[i][j].isAlive()) {
-							fill(0, 255, 0);
+							this.fill(0, 255, 0);
 						} else {
-							fill(0, 0, 0);
+							this.fill(0, 0, 0);
 						}
 					} else {
-						fill(0, 0, 0);
+						this.fill(0, 0, 0);
 					}
 				}
-				rect(Config.dims * i, Config.dims * j, Config.dims, Config.dims);
+				this.rect(Config.dims * i, Config.dims * j, Config.dims, Config.dims);
 			}
 		}
+	}
+
+	@Override
+	public void settings() {
+		this.fullScreen();
+		// size(1200,1200);
+	}
+
+	@Override
+	public void setup() {
+		this.frameRate(Config.framerate);
 	}
 }

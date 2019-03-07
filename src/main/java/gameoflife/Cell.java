@@ -12,16 +12,16 @@ public class Cell {
 		this.alive = al;
 	}
 
+	public String getColor() {
+		return this.color;
+	}
+
 	public boolean isAlive() {
-		return alive;
+		return this.alive;
 	}
 
 	public void setAlive(boolean alive) {
 		this.alive = alive;
-	}
-
-	public String getColor() {
-		return color;
 	}
 
 	public void setColor(String color) {
