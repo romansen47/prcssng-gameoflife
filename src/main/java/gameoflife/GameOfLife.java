@@ -7,14 +7,10 @@ import processing.core.PApplet;
 public class GameOfLife extends processing.template.Gui {
 	public static int count = 0;
 
+	static Random r = new Random();
 	public static int speed;
 	public static int tmpCount;
 	public static Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
-	/*
-	 * public static void main(String[] args) { PApplet.main(new String[] {
-	 * "--present","gameoflife.GameOfLife"}); }
-	 */
-	static Random r = new Random();
 
 	public static Cell[][] gen() {
 		final Cell[][] Gen = new Cell[Config.SIZE][Config.SIZE];
@@ -28,7 +24,7 @@ public class GameOfLife extends processing.template.Gui {
 		}
 		return (Gen);
 	}
-
+	
 	public static void main(String[] args) {
 		final GameOfLife gol = new GameOfLife();
 		gol.run("gameoflife.GameOfLife");
@@ -143,13 +139,14 @@ public class GameOfLife extends processing.template.Gui {
 	}
 
 	@Override
-	public void settings() {
-		this.fullScreen();
-		// size(1200,1200);
-	}
-
-	@Override
 	public void setup() {
 		this.frameRate(Config.framerate);
+//		background(255);
+//		frameRate(60);
+//		getSurface().setResizable(true);
+//		getSurface().setSize(10 * Config.SIZE, 5 * Config.SIZE);
+//		getSurface().setLocation(displayWidth - width >> 1,
+//				displayHeight - height >> 1);
+
 	}
 }
