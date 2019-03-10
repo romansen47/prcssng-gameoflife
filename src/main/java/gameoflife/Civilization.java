@@ -2,6 +2,7 @@ package gameoflife;
 
 public class Civilization {
 
+	final IConfig config = Config.getInstance();
 	private Cell[][] gen;
 
 	public Civilization(Cell[][] generation) {
@@ -13,34 +14,42 @@ public class Civilization {
 	}
 
 	public Cell[][] nextGen() {
-		final Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
+		final Cell[][] tmpGen = new Cell[config.getSize()][config.getSize()];
 		int count;
-		for (int i = 0; i < Config.SIZE; i++) {
-			for (int j = 0; j < Config.SIZE; j++) {
+		for (int i = 0; i < config.getSize(); i++) {
+			for (int j = 0; j < config.getSize(); j++) {
 				tmpGen[i][j] = new Cell();
 				count = 0;
-				if (this.getGen()[(i - 1 + Config.SIZE) % Config.SIZE][(j - 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i - 1 + config.getSize()) % config.getSize()][(j - 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i - 1 + Config.SIZE) % Config.SIZE][(j + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i - 1 + config.getSize()) % config.getSize()][(j + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i - 1 + Config.SIZE) % Config.SIZE][(j + 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i - 1 + config.getSize()) % config.getSize()][(j + 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i + Config.SIZE) % Config.SIZE][(j - 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i + config.getSize()) % config.getSize()][(j - 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i + Config.SIZE) % Config.SIZE][(j + 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i + config.getSize()) % config.getSize()][(j + 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i + 1 + Config.SIZE) % Config.SIZE][(j - 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i + 1 + config.getSize()) % config.getSize()][(j - 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i + 1 + Config.SIZE) % Config.SIZE][(j + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i + 1 + config.getSize()) % config.getSize()][(j + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
-				if (this.getGen()[(i + 1 + Config.SIZE) % Config.SIZE][(j + 1 + Config.SIZE) % Config.SIZE].isAlive()) {
+				if (this.getGen()[(i + 1 + config.getSize()) % config.getSize()][(j + 1 + config.getSize())
+						% config.getSize()].isAlive()) {
 					count = count + 1;
 				}
 				if (this.getGen()[i][j].isAlive()) {

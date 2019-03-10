@@ -5,18 +5,19 @@ import java.util.Random;
 import processing.core.PApplet;
 
 public class GameOfLife extends processing.template.Gui {
-	public static int count = 0;
 
+	final IConfig config = Config.getInstance();
+	public static int count = 0;
 	static Random r = new Random();
 	public static int speed;
 	public static int tmpCount;
-	public static Cell[][] tmpGen = new Cell[Config.SIZE][Config.SIZE];
+	public Cell[][] tmpGen = new Cell[config.getSize()][config.getSize()];
 
-	public static Cell[][] gen() {
-		final Cell[][] Gen = new Cell[Config.SIZE][Config.SIZE];
+	public Cell[][] gen() {
+		final Cell[][] Gen = new Cell[config.getSize()][config.getSize()];
 		{
-			for (int i = 0; i < Config.SIZE; i++) {
-				for (int j = 0; j < Config.SIZE; j++) {
+			for (int i = 0; i < config.getSize(); i++) {
+				for (int j = 0; j < config.getSize(); j++) {
 					Gen[i][j] = new Cell();
 					Gen[i][j].setAlive(GameOfLife.r.nextBoolean());
 				}
@@ -24,13 +25,13 @@ public class GameOfLife extends processing.template.Gui {
 		}
 		return (Gen);
 	}
-	
+
 	public static void main(String[] args) {
 		final GameOfLife gol = new GameOfLife();
 		gol.run("gameoflife.GameOfLife");
 	}
 
-	Civilization civ = new Civilization(GameOfLife.gen());
+	Civilization civ = new Civilization(gen());
 
 	public GameOfLife() {
 	}
@@ -58,24 +59,24 @@ public class GameOfLife extends processing.template.Gui {
 		this.text(PApplet.str(GameOfLife.count) + "th generation", 2200, 540);
 
 		if (this.keyPressed && this.key == 'c') {
-			Config.colors = !Config.colors;
+			config.setColors(!config.isColors());
 		}
 		if (this.keyPressed && this.key == 'r') {
-			this.civ.setGen(GameOfLife.gen());
+			this.civ.setGen(gen());
 		}
 		if (this.keyPressed && this.key == 's') {
-			for (int i = 0; i < Config.SIZE; i++) {
-				for (int j = 0; j < Config.SIZE; j++) {
-					GameOfLife.tmpGen[i][j] = new Cell();
-					GameOfLife.tmpGen[i][j].setAlive(this.civ.getGen()[i][j].isAlive());
+			for (int i = 0; i < config.getSize(); i++) {
+				for (int j = 0; j < config.getSize(); j++) {
+					tmpGen[i][j] = new Cell();
+					tmpGen[i][j].setAlive(this.civ.getGen()[i][j].isAlive());
 				}
 			}
 			GameOfLife.tmpCount = GameOfLife.count;
 		}
 		if (this.keyPressed && this.key == 'l') {
-			for (int i = 0; i < Config.SIZE; i++) {
-				for (int j = 0; j < Config.SIZE; j++) {
-					this.civ.getGen()[i][j].setAlive(GameOfLife.tmpGen[i][j].isAlive());
+			for (int i = 0; i < config.getSize(); i++) {
+				for (int j = 0; j < config.getSize(); j++) {
+					this.civ.getGen()[i][j].setAlive(tmpGen[i][j].isAlive());
 				}
 			}
 			GameOfLife.count = GameOfLife.tmpCount;
@@ -110,10 +111,10 @@ public class GameOfLife extends processing.template.Gui {
 
 	public void present(Civilization civ) {
 		final Cell[][] tmpCiv = civ.nextGen();
-		for (int i = 0; i < Config.SIZE; i++) {
-			for (int j = 0; j < Config.SIZE; j++) {
+		for (int i = 0; i < config.getSize(); i++) {
+			for (int j = 0; j < config.getSize(); j++) {
 				if (civ.getGen()[i][j].isAlive()) {
-					if (Config.colors) {
+					if (config.isColors()) {
 						if (tmpCiv[i][j].isAlive()) {
 							this.fill(255, 255, 255);
 						} else {
@@ -123,7 +124,7 @@ public class GameOfLife extends processing.template.Gui {
 						this.fill(255, 255, 255);
 					}
 				} else {
-					if (Config.colors) {
+					if (config.isColors()) {
 						if (tmpCiv[i][j].isAlive()) {
 							this.fill(0, 255, 0);
 						} else {
@@ -133,18 +134,18 @@ public class GameOfLife extends processing.template.Gui {
 						this.fill(0, 0, 0);
 					}
 				}
-				this.rect(Config.dims * i, Config.dims * j, Config.dims, Config.dims);
+				this.rect(config.getDims() * i, config.getDims() * j, config.getDims(), config.getDims());
 			}
 		}
 	}
 
 	@Override
 	public void setup() {
-		this.frameRate(Config.framerate);
+		this.frameRate(config.getFramerate());
 //		background(255);
 //		frameRate(60);
 //		getSurface().setResizable(true);
-//		getSurface().setSize(10 * Config.SIZE, 5 * Config.SIZE);
+//		getSurface().setSize(10 * config.SIZE, 5 * config.SIZE);
 //		getSurface().setLocation(displayWidth - width >> 1,
 //				displayHeight - height >> 1);
 
