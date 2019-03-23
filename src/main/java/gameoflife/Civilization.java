@@ -2,8 +2,8 @@ package gameoflife;
 
 public class Civilization {
 
-	final IConfig config = Config.getInstance();
-	private Cell[][] gen;
+	final IConfig		config	= Config.getInstance();
+	private Cell[][]	gen;
 
 	public Civilization(Cell[][] generation) {
 		setGen(generation);
@@ -14,12 +14,12 @@ public class Civilization {
 	}
 
 	public Cell[][] nextGen() {
-		final Cell[][] tmpGen = new Cell[config.getSize()][config.getSize()];
-		int count;
+		final Cell[][]	tmpGen	= new Cell[config.getSize()][config.getSize()];
+		int				count;
 		for (int i = 0; i < config.getSize(); i++) {
 			for (int j = 0; j < config.getSize(); j++) {
-				tmpGen[i][j] = new Cell();
-				count = 0;
+				tmpGen[i][j]	= new Cell();
+				count			= 0;
 				if (getGen()[(i - 1 + config.getSize()) % config.getSize()][(j - 1 + config.getSize())
 						% config.getSize()].isAlive()) {
 					count = count + 1;

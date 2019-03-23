@@ -6,12 +6,12 @@ import processing.core.PApplet;
 
 public class GameOfLife extends processing.template.Gui {
 
-	final IConfig config = Config.getInstance();
-	public static int count = 0;
-	static Random r = new Random();
-	public static int speed;
-	public static int tmpCount;
-	public Cell[][] tmpGen = new Cell[config.getSize()][config.getSize()];
+	final IConfig		config	= Config.getInstance();
+	public static int	count	= 0;
+	static Random		r		= new Random();
+	public static int	speed;
+	public static int	tmpCount;
+	public Cell[][]		tmpGen	= new Cell[config.getSize()][config.getSize()];
 
 	public Cell[][] gen() {
 		final Cell[][] Gen = new Cell[config.getSize()][config.getSize()];
