@@ -8,16 +8,16 @@ public class Cell {
 	}
 
 	public Cell(boolean al) {
-		this.color = "None";
-		this.alive = al;
+		color = "None";
+		alive = al;
 	}
 
 	public String getColor() {
-		return this.color;
+		return color;
 	}
 
 	public boolean isAlive() {
-		return this.alive;
+		return alive;
 	}
 
 	public void setAlive(boolean alive) {

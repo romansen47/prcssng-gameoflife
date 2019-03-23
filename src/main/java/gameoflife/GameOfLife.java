@@ -41,10 +41,10 @@ public class GameOfLife extends processing.template.Gui {
 
 		this.background(0);
 
-		this.present(this.civ);
-		this.civ.setGen(this.civ.nextGen());
+		present(civ);
+		civ.setGen(civ.nextGen());
 
-		this.textSize(30);
+		textSize(30);
 		this.fill(255, 255, 255, 255);
 		this.text("Options:", 2200, 100);
 		this.text("r :  	restart (random)", 2200, 150);
@@ -58,30 +58,30 @@ public class GameOfLife extends processing.template.Gui {
 		GameOfLife.count = GameOfLife.count + 1;
 		this.text(PApplet.str(GameOfLife.count) + "th generation", 2200, 540);
 
-		if (this.keyPressed && this.key == 'c') {
+		if (keyPressed && key == 'c') {
 			config.setColors(!config.isColors());
 		}
-		if (this.keyPressed && this.key == 'r') {
-			this.civ.setGen(gen());
+		if (keyPressed && key == 'r') {
+			civ.setGen(gen());
 		}
-		if (this.keyPressed && this.key == 's') {
+		if (keyPressed && key == 's') {
 			for (int i = 0; i < config.getSize(); i++) {
 				for (int j = 0; j < config.getSize(); j++) {
 					tmpGen[i][j] = new Cell();
-					tmpGen[i][j].setAlive(this.civ.getGen()[i][j].isAlive());
+					tmpGen[i][j].setAlive(civ.getGen()[i][j].isAlive());
 				}
 			}
 			GameOfLife.tmpCount = GameOfLife.count;
 		}
-		if (this.keyPressed && this.key == 'l') {
+		if (keyPressed && key == 'l') {
 			for (int i = 0; i < config.getSize(); i++) {
 				for (int j = 0; j < config.getSize(); j++) {
-					this.civ.getGen()[i][j].setAlive(tmpGen[i][j].isAlive());
+					civ.getGen()[i][j].setAlive(tmpGen[i][j].isAlive());
 				}
 			}
 			GameOfLife.count = GameOfLife.tmpCount;
 		}
-		if (this.keyPressed && this.key == '+') {
+		if (keyPressed && key == '+') {
 			if (GameOfLife.speed > 0) {
 				try {
 					Thread.sleep(200);
@@ -91,7 +91,7 @@ public class GameOfLife extends processing.template.Gui {
 				GameOfLife.speed = GameOfLife.speed - 50;
 			}
 		}
-		if (this.keyPressed && this.key == '-') {
+		if (keyPressed && key == '-') {
 			try {
 				Thread.sleep(200);
 			} catch (final InterruptedException e) {
@@ -99,8 +99,8 @@ public class GameOfLife extends processing.template.Gui {
 			}
 			GameOfLife.speed = GameOfLife.speed + 50;
 		}
-		if (this.keyPressed && this.key == 'q') {
-			this.exit();
+		if (keyPressed && key == 'q') {
+			exit();
 		}
 		try {
 			Thread.sleep(GameOfLife.speed);
@@ -141,7 +141,7 @@ public class GameOfLife extends processing.template.Gui {
 
 	@Override
 	public void setup() {
-		this.frameRate(config.getFramerate());
+		frameRate(config.getFramerate());
 //		background(255);
 //		frameRate(60);
 //		getSurface().setResizable(true);
