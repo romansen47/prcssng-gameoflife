@@ -1,15 +1,15 @@
 package gameoflife;
 
 public class Cell {
-	private boolean	alive;
-	private String	color;
+	private boolean alive;
+	private String color;
 
 	public Cell() {
 	}
 
 	public Cell(boolean al) {
-		color	= "None";
-		alive	= al;
+		color = "None";
+		alive = al;
 	}
 
 	public String getColor() {

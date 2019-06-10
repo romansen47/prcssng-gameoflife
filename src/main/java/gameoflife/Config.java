@@ -5,15 +5,15 @@ import java.awt.Toolkit;
 
 final public class Config implements IConfig {
 
-	private Dimension		screenSize			= Toolkit.getDefaultToolkit().getScreenSize();
-	private int				size				= 120;
-	private int				framerate			= 60;
-	private boolean			colors				= true;
-	private double			restartCondition	= 0;
-	private int				bottom				= (int) (getScreenSize().getHeight());
-	private int				rightWall			= (int) getScreenSize().getWidth();
-	private int				dims				= Math.min(getRightWall(), getBottom()) / getSize();
-	private static IConfig	instance;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private int size = 250;
+	private int framerate = 60;
+	private boolean colors = true;
+	private double restartCondition = 50;
+	private int bottom = (int) (getScreenSize().getHeight());
+	private int rightWall = (int) getScreenSize().getWidth();
+	private int dims = Math.min(getRightWall(), getBottom()) / getSize();
+	private static IConfig instance;
 
 	/**
 	 * Constructor
@@ -86,9 +86,7 @@ final public class Config implements IConfig {
 	}
 
 	/**
-	 * @param restartCondition the
-	 *                         restartCondition
-	 *                         to set
+	 * @param restartCondition the restartCondition to set
 	 */
 	@Override
 	public void setRestartCondition(double restartCondition) {
@@ -152,8 +150,7 @@ final public class Config implements IConfig {
 	}
 
 	/**
-	 * @param screenSize the screenSize to
-	 *                   set
+	 * @param screenSize the screenSize to set
 	 */
 	@Override
 	public void setScreenSize(Dimension screenSize) {

@@ -6,12 +6,12 @@ import processing.core.PApplet;
 
 public class GameOfLife extends processing.template.Gui {
 
-	final IConfig		config	= Config.getInstance();
-	public static int	count	= 0;
-	static Random		r		= new Random();
-	public static int	speed;
-	public static int	tmpCount;
-	public Cell[][]		tmpGen	= new Cell[config.getSize()][config.getSize()];
+	final IConfig config = Config.getInstance();
+	public static int count = 0;
+	static Random r = new Random();
+	public static int speed;
+	public static int tmpCount;
+	public Cell[][] tmpGen = new Cell[config.getSize()][config.getSize()];
 
 	public Cell[][] gen() {
 		final Cell[][] Gen = new Cell[config.getSize()][config.getSize()];
@@ -47,13 +47,13 @@ public class GameOfLife extends processing.template.Gui {
 		textSize(30);
 		this.fill(255, 255, 255, 255);
 		this.text("Options:", 2200, 100);
-		this.text("r :  	restart (random)", 2200, 150);
-		this.text("s :   save state", 2200, 180);
-		this.text("l :   reload state", 2200, 210);
-		this.text("+ :   speed up", 2200, 240);
-		this.text("- :   slow down", 2200, 270);
-		this.text("c :   colors", 2200, 300);
-		this.text("q :   quit", 2200, 360);
+		this.text("r :  	restart (random)", config.getBottom() + 100, 150);
+		this.text("s :   save state", config.getBottom() + 100, 180);
+		this.text("l :   reload state", config.getBottom() + 100, 210);
+		this.text("+ :   speed up", config.getBottom() + 100, 240);
+		this.text("- :   slow down", config.getBottom() + 100, 270);
+		this.text("c :   colors", config.getBottom() + 100, 300);
+		this.text("q :   quit", config.getBottom() + 100, 360);
 
 		GameOfLife.count = GameOfLife.count + 1;
 		this.text(PApplet.str(GameOfLife.count) + "th generation", 2200, 540);

@@ -40,9 +40,7 @@ interface IConfig {
 	double getRestartCondition();
 
 	/**
-	 * @param restartCondition the
-	 *                         restartCondition
-	 *                         to set
+	 * @param restartCondition the restartCondition to set
 	 */
 	void setRestartCondition(double restartCondition);
 
@@ -82,8 +80,7 @@ interface IConfig {
 	Dimension getScreenSize();
 
 	/**
-	 * @param screenSize the screenSize to
-	 *                   set
+	 * @param screenSize the screenSize to set
 	 */
 	void setScreenSize(Dimension screenSize);
 
